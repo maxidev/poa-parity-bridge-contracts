@@ -312,6 +312,9 @@ async function deployContract(contractJson, args, {from, network, nonce}) {
   if(tx.status !== '0x1'){
     throw new Error('Tx failed');
   }
+  else if(tx === undefined || tx === null){
+    throw new Error("Tx failed, check account Ether funds");
+  }
   instance.options.address = tx.contractAddress;
   instance.deployedBlockNumber = tx.blockNumber
   return instance;
